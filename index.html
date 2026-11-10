@@ -45,7 +45,7 @@
     z-index: -2;
     background:
       linear-gradient(180deg, rgba(6,21,37,0.88) 0%, rgba(6,21,37,0.96) 30%, #061525 65%),
-      url("assets/hero.jpg") center 15% / cover no-repeat;
+      url("assets/hero.jpg?v=20261110b") center 15% / cover no-repeat;
     background-attachment: scroll;
     filter: blur(6px) saturate(1.05);
     transform: scale(1.06);
@@ -69,16 +69,32 @@
     border-radius: 0 0 28px 28px;
     overflow: hidden;
   }
+  .hero-slides {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    background-position: center 20%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    will-change: opacity;
+  }
+  .hero-slide.is-active { opacity: 1; }
   .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 0;
-    background:
-      linear-gradient(180deg, rgba(6,21,37,0.15) 0%, rgba(6,21,37,0.35) 35%, rgba(6,21,37,0.92) 78%, #061525 100%),
-      url("assets/hero.jpg") center 20% / cover no-repeat;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(6,21,37,0.15) 0%, rgba(6,21,37,0.35) 35%, rgba(6,21,37,0.92) 78%, #061525 100%);
   }
-  .hero-inner { position: relative; z-index: 1; }
+  .hero-inner { position: relative; z-index: 2; }
   .pill {
     display: inline-flex;
     align-items: center;
@@ -426,6 +442,15 @@
 <div class="wrap">
 
   <header class="hero">
+    <div class="hero-slides" id="hero-slides" aria-hidden="true">
+      <div class="hero-slide is-active" style="background-image:url('assets/hero.jpg?v=20261110b')" data-label="רגיל"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-sufganiya.jpg?v=20261110b')" data-label="סופגנייה"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-party-blower.jpg?v=20261110b')" data-label="מלשון"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-shot.jpg?v=20261110b')" data-label="צ׳ייסר"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-lei.jpg?v=20261110b')" data-label="ליי ומשקפיים"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-afterparty.jpg?v=20261110b')" data-label="אפטר-פארטי"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-coconut.jpg?v=20261110b')" data-label="קוקוס"></div>
+    </div>
     <div class="hero-inner">
       <div class="pill">🏝️ טיול החבר׳ה · 17–24.11.2026</div>
       <h1>תאילנד 2026 🌴<br/>החבר׳ה בפוקט</h1>
@@ -759,6 +784,28 @@
       }
     }
   }
+
+
+  // Hero slideshow — 5s crossfade, preloaded
+  (function heroRotate() {
+    const slides = Array.from(document.querySelectorAll("#hero-slides .hero-slide"));
+    if (slides.length < 2) return;
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const INTERVAL = 5000;
+    // Preload
+    slides.forEach((el) => {
+      const m = (el.style.backgroundImage || "").match(/url\(['"]?([^'")]+)['"]?\)/);
+      if (m) { const img = new Image(); img.src = m[1]; }
+    });
+    let i = 0;
+    function go(next) {
+      slides[i].classList.remove("is-active");
+      i = next;
+      slides[i].classList.add("is-active");
+    }
+    if (reduce) return; // keep first slide
+    setInterval(() => go((i + 1) % slides.length), INTERVAL);
+  })();
 
   tick();
   highlightNext();
