@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0a2540" />
+<title>תאילנד 2026 🌴 החבר׳ה בפוקט</title>
+<style>
+  :root {
+    --bg: #061525;
+    --bg2: #0a2540;
+    --card: rgba(10,37,64,0.82);
+    --card-solid: #0f2d4a;
+    --border: rgba(255,255,255,0.14);
+    --text: #f5fbff;
+    --muted: #a8c0d8;
+    --accent: #2dd4bf;
+    --accent2: #fbbf24;
+    --pink: #fb7185;
+    --ok: #34d399;
+    --warn: #fbbf24;
+    --plan: #60a5fa;
+    --done: #94a3b8;
+    --shadow: 0 12px 40px rgba(0,0,0,0.35);
+    --radius: 18px;
+    --font: "Heebo", "Segoe UI", "Rubik", "Arial Hebrew", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Fixed parallax-ish bg */
+    .bg-fixed {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      linear-gradient(180deg, rgba(6,21,37,0.88) 0%, rgba(6,21,37,0.96) 30%, #061525 65%),
+      url("assets/hero.jpg") center 15% / cover no-repeat;
+    background-attachment: scroll;
+    filter: blur(6px) saturate(1.05);
+    transform: scale(1.06);
+    pointer-events: none;
+  }
+  @media (min-width: 768px) {
+    .bg-fixed { background-attachment: fixed; }
+  }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px 64px; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px 16px 40px;
+    margin: 0 -16px 28px;
+    border-radius: 0 0 28px 28px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(180deg, rgba(6,21,37,0.15) 0%, rgba(6,21,37,0.35) 35%, rgba(6,21,37,0.92) 78%, #061525 100%),
+      url("assets/hero.jpg") center 20% / cover no-repeat;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(45,212,191,0.18);
+    border: 1px solid rgba(45,212,191,0.4);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+    backdrop-filter: blur(8px);
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 7vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    margin-bottom: 10px;
+  }
+  .hero .sub {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 22px;
+    max-width: 34ch;
+  }
+
+  /* Countdown */
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    background: rgba(15,45,74,0.72);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 12px;
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow);
+  }
+  .cd-item { text-align: center; }
+  .cd-num {
+    display: block;
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: var(--accent2);
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .cd-note { grid-column: 1 / -1; text-align: center; font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* Sections */
+  section { margin: 28px 0; }
+  .sec-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sec-title span.emoji { font-size: 1.3rem; }
+
+  /* Crew */
+  .crew {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .crew-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 12px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+  }
+  .avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: grid; place-items: center;
+    font-weight: 800; font-size: 1.15rem;
+    color: #062033;
+    background: linear-gradient(135deg, var(--accent), #38bdf8);
+  }
+
+  .avatar.photo {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: transparent;
+    font-size: 0;
+    border: 2px solid rgba(255,255,255,0.25);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  }
+
+  img.avatar.photo {
+    object-fit: cover;
+    object-position: center;
+    padding: 0;
+  }
+
+
+  .crew-card:nth-child(2) .avatar { background: linear-gradient(135deg, var(--accent2), #f97316); }
+  .crew-card:nth-child(3) .avatar { background: linear-gradient(135deg, var(--pink), #e879f9); }
+  .crew-card:nth-child(4) .avatar { background: linear-gradient(135deg, #818cf8, #60a5fa); }
+  .crew-name { font-weight: 700; font-size: 0.95rem; }
+  .crew-tag { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-right: 6px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 8px; bottom: 8px; right: 19px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), rgba(45,212,191,0.15));
+    border-radius: 3px;
+  }
+  .t-item {
+    position: relative;
+    padding: 0 36px 18px 0;
+  }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-dot {
+    position: absolute;
+    right: 11px; top: 18px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--bg2);
+    border: 3px solid var(--accent);
+    z-index: 1;
+    box-shadow: 0 0 0 4px rgba(45,212,191,0.15);
+  }
+  .t-item.done .t-dot { border-color: var(--done); box-shadow: none; background: var(--done); }
+  .t-item.open .t-dot { border-color: var(--warn); }
+  .t-item.plan .t-dot { border-color: var(--plan); }
+  .t-item.next .t-card {
+    border-color: rgba(45,212,191,0.55);
+    box-shadow: 0 0 0 2px rgba(45,212,191,0.25), var(--shadow);
+  }
+  .t-item.next .t-dot {
+    border-color: var(--accent2);
+    box-shadow: 0 0 0 5px rgba(251,191,36,0.25);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 4px rgba(251,191,36,0.2); }
+    50% { box-shadow: 0 0 0 8px rgba(251,191,36,0.08); }
+  }
+  .t-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    backdrop-filter: blur(10px);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .t-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .t-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    background: rgba(45,212,191,0.12);
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+  .badge.ok { background: rgba(52,211,153,0.18); color: var(--ok); }
+  .badge.warn { background: rgba(251,191,36,0.18); color: var(--warn); }
+  .badge.plan { background: rgba(96,165,250,0.18); color: var(--plan); }
+  .badge.done { background: rgba(148,163,184,0.2); color: var(--done); }
+  .badge.next-badge { background: rgba(251,191,36,0.22); color: var(--accent2); }
+  .t-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
+  .t-meta { font-size: 0.88rem; color: var(--muted); }
+  .t-meta strong { color: var(--text); font-weight: 600; }
+  .t-meta p { margin: 3px 0; }
+  .t-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: background .15s, transform .15s;
+  }
+  .btn:hover { background: rgba(255,255,255,0.12); }
+  .btn:active { transform: scale(0.98); }
+  .btn.primary {
+    background: linear-gradient(135deg, #14b8a6, #0ea5e9);
+    border: none;
+    color: #042033;
+  }
+  .btn.wa {
+    background: rgba(37,211,102,0.15);
+    border-color: rgba(37,211,102,0.35);
+    color: #4ade80;
+  }
+
+  /* Reminders */
+  .reminders {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px 14px;
+    backdrop-filter: blur(8px);
+  }
+  .rem {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  .rem:last-child { border-bottom: none; }
+  .rem-ico {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    background: rgba(251,191,36,0.15);
+    font-size: 14px;
+  }
+  .rem.done .rem-ico { background: rgba(52,211,153,0.15); }
+  .rem-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* Footer CTA */
+  .cta {
+    margin-top: 32px;
+    text-align: center;
+    padding: 24px 16px;
+    background: linear-gradient(135deg, rgba(20,184,166,0.18), rgba(14,165,233,0.18));
+    border: 1px solid rgba(45,212,191,0.35);
+    border-radius: 22px;
+  }
+  .cta p { color: var(--muted); margin: 8px 0 16px; font-size: 0.92rem; }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 28px;
+    padding-bottom: 20px;
+  }
+
+  /* Nav chips */
+  .nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 0 8px;
+    margin-bottom: 8px;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none !important;
+  }
+
+  @media (min-width: 640px) {
+    .crew { grid-template-columns: repeat(4, 1fr); }
+    .hero { min-height: 78vh; margin: 0 -16px 36px; border-radius: 0 0 36px 36px; }
+  }
+
+  /* Maybe joining */
+  .maybe {
+    margin: 18px 0 8px;
+    background: rgba(251,191,36,0.08);
+    border: 2px dashed rgba(251,191,36,0.55);
+    border-radius: 18px;
+    padding: 16px 14px;
+    backdrop-filter: blur(8px);
+  }
+  .maybe-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .maybe-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .maybe-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: right;
+  }
+  .maybe-card .avatar.photo {
+    width: 64px; height: 64px;
+    flex-shrink: 0;
+    margin: 0;
+  }
+  .maybe-name { font-weight: 800; font-size: 1.05rem; }
+  .maybe-line { color: var(--muted); font-size: 0.92rem; margin-top: 3px; line-height: 1.45; }
+  .maybe-line strong { color: var(--accent2); font-weight: 700; }
+
+
+
+
+
+
+</style>
+</head>
+<body>
+<div class="bg-fixed" aria-hidden="true"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="pill">🏝️ טיול החבר׳ה · 17–24.11.2026</div>
+      <h1>תאילנד 2026 🌴<br/>החבר׳ה בפוקט</h1>
+      <p class="sub">פוקט · 17–24.11 · בריכות, בשר וים. כל מה שסגור, ומה שעוד פתוח.</p>
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="cd-item"><span class="cd-num" id="cd-d">--</span><div class="cd-label">ימים</div></div>
+        <div class="cd-item"><span class="cd-num" id="cd-h">--</span><div class="cd-label">שעות</div></div>
+        <div class="cd-item"><span class="cd-num" id="cd-m">--</span><div class="cd-label">דקות</div></div>
+        <div class="cd-item"><span class="cd-num" id="cd-s">--</span><div class="cd-label">שניות</div></div>
+        <div class="cd-note" id="cd-note">עד שהחבר׳ה מגיעים · 17.11.2026</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="ניווט מהיר">
+    <a href="#crew">החבר׳ה</a>
+    <a href="#maybe">אולי</a>
+    <a href="#timeline">הלו״ז</a>
+    <a href="#reminders">תזכורות</a>
+    <a href="#fullpage">העמוד המלא</a>
+  </nav>
+
+  <section id="crew">
+    <h2 class="sec-title"><span class="emoji">👥</span> מי בטיול</h2>
+    <div class="crew">
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/nadav-cartoon-avatar.jpg" alt="נדב אשל" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">נדב אשל</div>
+        <div class="crew-tag">פוקט · 17–24.11</div>
+      </div>
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/nir-cartoon-avatar.jpg" alt="ניר זהר" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">ניר זהר</div>
+        <div class="crew-tag">מצטרף 17.11</div>
+      </div>
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/amit-cartoon-avatar.jpg" alt="עמית לשם" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">עמית לשם</div>
+        <div class="crew-tag">מצטרף 17.11</div>
+      </div>
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/tomer-cartoon-avatar.jpg" alt="תומר פרזן" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">תומר פרזן</div>
+        <div class="crew-tag">מצטרף 17.11</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="maybe" class="maybe" aria-label="אולי מצטרף">
+    <div class="maybe-head">
+      <h2 class="maybe-title"><span class="emoji">🎲</span> אולי מצטרף…</h2>
+      <span class="badge plan">עוד לא סגור</span>
+    </div>
+    <div class="maybe-card">
+      <img class="avatar photo" src="assets/gal-cartoon-avatar.jpg" alt="גל ארז" width="64" height="64"
+           style="object-fit:cover;object-position:center;display:block;background:none;" />
+      <div>
+        <div class="maybe-name">גל ארז</div>
+        <div class="maybe-line">אולי מצטרף לטיול החבר׳ה בפוקט.<br/><strong>גל, אל תאכזב 😉</strong></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="timeline">
+    <h2 class="sec-title"><span class="emoji">📅</span> הלו״ז</h2>
+    <div class="timeline" id="timeline-list">
+
+      <!-- 17-24 villa -->
+      <article class="t-item open" data-start="2026-11-17" data-end="2026-11-24">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-top">
+            <span class="t-date">17–24.11</span>
+            <span class="badge warn">פתוח</span>
+          </div>
+          <h3 class="t-title">🏡 וילה 4 חדרי שינה · כולם ביחד</h3>
+          <div class="t-meta">
+            <p>נדב, ניר, עמית ותומר · בריכה פרטית · עוד לא נבחרה</p>
+            <p>מועמדות: Rawai SeaView · Rosemary Villa (Bang Tao)</p>
+          </div>
+          <div class="t-actions">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.airbnb.com/rooms/930761022304341654">Rawai SeaView</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.airbnb.com/rooms/1019957473103537820">Rosemary Villa</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 18 Cafe del Mar -->
+      <article class="t-item" data-start="2026-11-18" data-end="2026-11-18">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-top">
+            <span class="t-date">רביעי 18.11</span>
+            <span class="badge ok">סגור</span>
+          </div>
+          <h3 class="t-title">🍹 Café del Mar · Oasis Premium Cabana</h3>
+          <div class="t-meta">
+            <p><strong>14:00–20:00</strong> · קמלה · ל־8–10 אנשים · על שם Nadav Eschel, 5 אנשים</p>
+            <p>הזמנה <strong>#5ZFLFVPDX5RN</strong></p>
+            <p>צ׳ק־אין עד 14:00 · קוד לבוש Beach Chic · בריכה מגיל 18</p>
+            <p>118/19 Moo 3, Kamala, Kathu District</p>
+            <p>טלפון +66 93 580 4486</p>
+          </div>
+          <div class="t-actions">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Cafe%20del%20Mar%20Phuket%2C%20118%2F19%20Moo%203%2C%20Kamala">📍 מפה</a>
+            <a class="btn" href="tel:+66935804486">📞 התקשר</a>
+            <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/66935804486">WhatsApp</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 19 Jetski -->
+      <article class="t-item plan" data-start="2026-11-19" data-end="2026-11-19" data-time="13:30">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-top">
+            <span class="t-date">חמישי 19.11 · 13:30–17:30</span>
+            <span class="badge plan">עוד לא סגור</span>
+          </div>
+          <h3 class="t-title">🚤 Island Rides · 9 Islands Jet Ski</h3>
+          <div class="t-meta">
+            <p><strong>13:30–17:30</strong> · 5 אנשים / 3 ג׳טסקיים</p>
+            <p>איסוף Bang Tao / Cherngtalay · מפגש AA Marina Rasada</p>
+            <p>טלפון / וואטסאפ +66 80 314 0043</p>
+          </div>
+          <div class="t-actions">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=AA%20Marina%20Rasada%20Phuket">📍 מפגש</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.islandridesphuket.com/jet-ski">🌐 האתר</a>
+            <a class="btn" href="tel:+66803140043">📞 התקשר</a>
+            <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/66803140043">WhatsApp</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 19 Wagyu -->
+      <article class="t-item" data-start="2026-11-19" data-end="2026-11-19" data-time="21:00">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-top">
+            <span class="t-date">חמישי 19.11 · 21:00</span>
+            <span class="badge ok">סגור</span>
+          </div>
+          <h3 class="t-title">🥩 Wagyu Steakhouse · צ׳רנגטלאי</h3>
+          <div class="t-meta">
+            <p><strong>21:00</strong> · 5 אורחים על שם Nadav Eschel</p>
+            <p>הזמנה <strong>#4H76AM3MDDKB</strong> · מקדמה 5,000฿ שולמו</p>
+            <p>קוד לבוש Smart Casual · בלי כפכפים / בגדי ים / גופיות / סנדלים פתוחים לגברים</p>
+            <p>106/46 Moo 3, Cherngtalay, Thalang, Phuket 83110</p>
+            <p>טלפון +66 94 480 0882</p>
+          </div>
+          <div class="t-actions">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Wagyu%20Steakhouse%2C%20106%2F46%20Moo%203%2C%20Choeng%20Thale%2C%20Phuket">📍 מפה</a>
+            <a class="btn" href="tel:+66944800882">📞 התקשר</a>
+            <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/66944800882">WhatsApp</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 20 YONA -->
+      <article class="t-item" data-start="2026-11-20" data-end="2026-11-20">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-top">
+            <span class="t-date">שישי 20.11</span>
+            <span class="badge ok">יש הזמנה</span>
+          </div>
+          <h3 class="t-title">🛥️ YONA Beach Club</h3>
+          <div class="t-meta">
+            <p>מועדון חוף צף · בריכה, DJ ומסעדה ים־תיכונית</p>
+            <p><strong>מפגש:</strong> משרד YONA, Royal Phuket Marina, יחידה MC1-5</p>
+            <p>63/102 Koh Kaew, Mueang Phuket 83000</p>
+            <p>סירת הסעה כל 10–15 דק׳ · כ־15–20 דק׳ שיט · שעה TBD</p>
+            <p>טלפון / וואטסאפ +66 2 430 4400</p>
+          </div>
+          <div class="t-actions">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=YONA%20Beach%20Club%20office%20Royal%20Phuket%20Marina%20MC1-5">📍 נקודת מפגש</a>
+            <a class="btn" href="tel:+6624304400">📞 התקשר</a>
+            <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/6624304400">WhatsApp</a>
+          </div>
+        </div>
+      </article>
+      <!-- 22 RZR -->
+      <article class="t-item plan" data-start="2026-11-22" data-end="2026-11-22" data-time="10:00">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-top">
+            <span class="t-date">ראשון 22.11 · 10:00</span>
+            <span class="badge plan">עוד לא סגור</span>
+          </div>
+          <h3 class="t-title">🏎️ Jungle Extreme · RZR Off-Road</h3>
+          <div class="t-meta">
+            <p><strong>10:00</strong> · 60 דק׳ · 3 Razers</p>
+            <p>איסוף Bang Tao / Cherngtalay</p>
+          </div>
+        </div>
+      </article>
+
+
+    </div>
+  </section>
+
+  <section id="reminders">
+    <h2 class="sec-title"><span class="emoji">⏰</span> תזכורות</h2>
+    <div class="reminders">
+      <div class="rem">
+        <div class="rem-ico">🛂</div>
+        <div>
+          <div>ניר, עמית ותומר צריכים למלא TDAC לפני הנחיתה</div>
+          <div class="rem-meta">חובה לכל נוסע שאינו תאילנדי</div>
+        </div>
+      </div>
+      <div class="rem">
+        <div class="rem-ico">🍹</div>
+        <div>
+          <div>Café del Mar: חייבים צ׳ק־אין עד 14:00 · אחרת אפשר לאבד את ההזמנה בלי החזר</div>
+          <div class="rem-meta">18.11 · Beach Chic · בריכה עד 20:00 מגיל 18</div>
+        </div>
+      </div>
+      <div class="rem">
+        <div class="rem-ico">💸</div>
+        <div>
+          <div>Café del Mar: ביטול עד 6 ימים לפני מחזיר 95%. פחות מ־72 שעות לפני — אין החזר</div>
+          <div class="rem-meta">תנאי ביטול</div>
+        </div>
+      </div>
+      <div class="rem">
+        <div class="rem-ico">🥩</div>
+        <div>
+          <div>Wagyu: ביטול עם החזר מלא אפשרי עד 17.11 בשעה 21:00</div>
+          <div class="rem-meta">השולחן מוחזק 15 דקות · להביא תעודה ואישור הזמנה</div>
+        </div>
+      </div>
+      <div class="rem">
+        <div class="rem-ico">🛥️</div>
+        <div>
+          <div>להגיע למשרד YONA ב־Royal Phuket Marina</div>
+          <div class="rem-meta">20.11 · יחידה MC1-5</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta" id="fullpage">
+    <h2 style="font-size:1.15rem;font-weight:800;">רוצים את כל הפרטים?</h2>
+    <p>מפות, קישורים, ימים פתוחים ועדכונים חיים — בעמוד הטיול המלא.</p>
+    <a class="btn primary" target="_blank" rel="noopener"
+       href="https://cursor.com/canvas/store-3a7bd89c-6a4f-422d-a82f-4bb25ee1ecf0/d9b7c32a-324d-4ed2-baae-f53fa4431815">
+      פתח את עמוד הלו״ז המלא →
+    </a>
+  </div>
+
+  <p class="footer">מעודכן לפי עמוד הטיול · כל השעות לפי שעון תאילנד (Asia/Bangkok)<br/>תאילנד 2026 · נדב · ניר · עמית · תומר 🌴</p>
+</div>
+
+<script>
+(function () {
+  const TARGET = new Date("2026-11-17T00:00:00+07:00");
+
+  function bangkokNow() {
+    // Instant as seen in Asia/Bangkok
+    const fmt = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Bangkok",
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit",
+      hour12: false
+    });
+    const parts = Object.fromEntries(fmt.formatToParts(new Date()).map(p => [p.type, p.value]));
+    return {
+      y: +parts.year, m: +parts.month, d: +parts.day,
+      H: +parts.hour, M: +parts.minute, S: +parts.second,
+      dateStr: parts.year + "-" + parts.month + "-" + parts.day,
+      minutes: (+parts.hour) * 60 + (+parts.minute)
+    };
+  }
+
+  function tick() {
+    const now = Date.now();
+    let diff = TARGET.getTime() - now;
+    const note = document.getElementById("cd-note");
+    if (diff <= 0) {
+      document.getElementById("cd-d").textContent = "0";
+      document.getElementById("cd-h").textContent = "0";
+      document.getElementById("cd-m").textContent = "0";
+      document.getElementById("cd-s").textContent = "0";
+      if (note) note.textContent = "החבר׳ה כבר כאן! 🎉";
+      return;
+    }
+    const s = Math.floor(diff / 1000);
+    const d = Math.floor(s / 86400);
+    const h = Math.floor((s % 86400) / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    document.getElementById("cd-d").textContent = d;
+    document.getElementById("cd-h").textContent = h;
+    document.getElementById("cd-m").textContent = m;
+    document.getElementById("cd-s").textContent = sec;
+  }
+
+  function highlightNext() {
+    const bk = bangkokNow();
+    const items = Array.from(document.querySelectorAll(".t-item"));
+    items.forEach(el => el.classList.remove("next"));
+    // Find first item whose end date is today or in the future (or start >= today for multi-day in progress)
+    let nextEl = null;
+    for (const el of items) {
+      const start = el.dataset.start;
+      const end = el.dataset.end || start;
+      if (el.classList.contains("done")) continue;
+      // Still ongoing if today is between start and end inclusive
+      if (bk.dateStr >= start && bk.dateStr <= end) {
+        nextEl = el;
+        break;
+      }
+      if (start > bk.dateStr) {
+        nextEl = el;
+        break;
+      }
+    }
+    if (nextEl) {
+      nextEl.classList.add("next");
+      // Add "עכשיו / הבא" badge if not present
+      const top = nextEl.querySelector(".t-top");
+      if (top && !top.querySelector(".next-badge")) {
+        const b = document.createElement("span");
+        b.className = "badge next-badge";
+        const end = nextEl.dataset.end || nextEl.dataset.start;
+        const start = nextEl.dataset.start;
+        b.textContent = (bk.dateStr >= start && bk.dateStr <= end) ? "עכשיו" : "הבא בתור";
+        top.appendChild(b);
+      }
+    }
+  }
+
+  tick();
+  highlightNext();
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
