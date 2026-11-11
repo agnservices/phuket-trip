@@ -45,7 +45,7 @@
     z-index: -2;
     background:
       linear-gradient(180deg, rgba(6,21,37,0.88) 0%, rgba(6,21,37,0.96) 30%, #061525 65%),
-      url("assets/hero.jpg?v=20261110b") center 15% / cover no-repeat;
+      url("assets/hero.jpg") center 15% / cover no-repeat;
     background-attachment: scroll;
     filter: blur(6px) saturate(1.05);
     transform: scale(1.06);
@@ -205,6 +205,13 @@
   .crew-card:nth-child(4) .avatar { background: linear-gradient(135deg, #818cf8, #60a5fa); }
   .crew-name { font-weight: 700; font-size: 0.95rem; }
   .crew-tag { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  .crew-card:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc((100% - 10px) / 2);
+  }
+
 
   /* Timeline */
   .timeline { position: relative; padding-right: 6px; }
@@ -388,47 +395,10 @@
 
   @media (min-width: 640px) {
     .crew { grid-template-columns: repeat(4, 1fr); }
+    .crew-card:last-child { grid-column: auto; width: auto; justify-self: stretch; }
     .hero { min-height: 78vh; margin: 0 -16px 36px; border-radius: 0 0 36px 36px; }
   }
 
-  /* Maybe joining */
-  .maybe {
-    margin: 18px 0 8px;
-    background: rgba(251,191,36,0.08);
-    border: 2px dashed rgba(251,191,36,0.55);
-    border-radius: 18px;
-    padding: 16px 14px;
-    backdrop-filter: blur(8px);
-  }
-  .maybe-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-  }
-  .maybe-title {
-    font-size: 1.05rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .maybe-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-align: right;
-  }
-  .maybe-card .avatar.photo {
-    width: 64px; height: 64px;
-    flex-shrink: 0;
-    margin: 0;
-  }
-  .maybe-name { font-weight: 800; font-size: 1.05rem; }
-  .maybe-line { color: var(--muted); font-size: 0.92rem; margin-top: 3px; line-height: 1.45; }
-  .maybe-line strong { color: var(--accent2); font-weight: 700; }
 
 
 
@@ -443,13 +413,13 @@
 
   <header class="hero">
     <div class="hero-slides" id="hero-slides" aria-hidden="true">
-      <div class="hero-slide is-active" style="background-image:url('assets/hero.jpg?v=20261110b')" data-label="רגיל"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-sufganiya.jpg?v=20261110b')" data-label="סופגנייה"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-party-blower.jpg?v=20261110b')" data-label="מלשון"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-shot.jpg?v=20261110b')" data-label="צ׳ייסר"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-lei.jpg?v=20261110b')" data-label="ליי ומשקפיים"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-afterparty.jpg?v=20261110b')" data-label="אפטר-פארטי"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-coconut.jpg?v=20261110b')" data-label="קוקוס"></div>
+      <div class="hero-slide is-active" style="background-image:url('assets/hero.jpg?v=20261111d')" data-label="עמית לשם"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-nadav-boss.jpg?v=20261111d')" data-label="נדב אשל"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-nir-chill.jpg?v=20261111d')" data-label="ניר זוהר"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-tomer-gym.jpg?v=20261111d')" data-label="תומר פרזן"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-gal-casanova.jpg?v=20261111d')" data-label="גל ארז"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-omer-pilot.jpg?v=20261111d')" data-label="עומר קנת"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-gabi-poker.jpg?v=20261111d')" data-label="גבי ארז"></div>
     </div>
     <div class="hero-inner">
       <div class="pill">🏝️ טיול החבר׳ה · 17–24.11.2026</div>
@@ -467,7 +437,6 @@
 
   <nav class="nav" aria-label="ניווט מהיר">
     <a href="#crew">החבר׳ה</a>
-    <a href="#maybe">אולי</a>
     <a href="#timeline">הלו״ז</a>
     <a href="#reminders">תזכורות</a>
     <a href="#fullpage">העמוד המלא</a>
@@ -477,42 +446,43 @@
     <h2 class="sec-title"><span class="emoji">👥</span> מי בטיול</h2>
     <div class="crew">
       <div class="crew-card">
-        <img class="avatar photo" src="assets/nadav-cartoon-avatar.jpg" alt="נדב אשל" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/nadav-cartoon-avatar.jpg?v=20261111d" alt="נדב אשל" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">נדב אשל</div>
         <div class="crew-tag">פוקט · 17–24.11</div>
       </div>
       <div class="crew-card">
-        <img class="avatar photo" src="assets/nir-cartoon-avatar.jpg" alt="ניר זהר" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/nir-cartoon-avatar.jpg?v=20261111d" alt="ניר זהר" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">ניר זהר</div>
         <div class="crew-tag">מצטרף 17.11</div>
       </div>
       <div class="crew-card">
-        <img class="avatar photo" src="assets/amit-cartoon-avatar.jpg" alt="עמית לשם" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/amit-cartoon-avatar.jpg?v=20261111d" alt="עמית לשם" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">עמית לשם</div>
         <div class="crew-tag">מצטרף 17.11</div>
       </div>
       <div class="crew-card">
-        <img class="avatar photo" src="assets/tomer-cartoon-avatar.jpg" alt="תומר פרזן" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/tomer-cartoon-avatar.jpg?v=20261111d" alt="תומר פרזן" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">תומר פרזן</div>
+        <div class="crew-tag">מצטרף 17.11</div>
+      </div>
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/gal-cartoon-avatar.jpg?v=20261111d" alt="גל ארז" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">גל ארז</div>
+        <div class="crew-tag">מצטרף 17.11</div>
+      </div>
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/omer-cartoon-avatar.jpg?v=20261111d" alt="עומר קנת" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">עומר קנת</div>
+        <div class="crew-tag">מצטרף 17.11</div>
+      </div>
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/gabi-cartoon-avatar.jpg?v=20261111d" alt="גבי ארז" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">גבי ארז</div>
         <div class="crew-tag">מצטרף 17.11</div>
       </div>
     </div>
   </section>
 
-  <section id="maybe" class="maybe" aria-label="אולי מצטרף">
-    <div class="maybe-head">
-      <h2 class="maybe-title"><span class="emoji">🎲</span> אולי מצטרף…</h2>
-      <span class="badge plan">עוד לא סגור</span>
-    </div>
-    <div class="maybe-card">
-      <img class="avatar photo" src="assets/gal-cartoon-avatar.jpg" alt="גל ארז" width="64" height="64"
-           style="object-fit:cover;object-position:center;display:block;background:none;" />
-      <div>
-        <div class="maybe-name">גל ארז</div>
-        <div class="maybe-line">אולי מצטרף לטיול החבר׳ה בפוקט.<br/><strong>גל, אל תאכזב 😉</strong></div>
-      </div>
-    </div>
-  </section>
 
 
   <section id="timeline">
@@ -529,7 +499,7 @@
           </div>
           <h3 class="t-title">🏡 וילה 4 חדרי שינה · כולם ביחד</h3>
           <div class="t-meta">
-            <p>נדב, ניר, עמית ותומר · בריכה פרטית · עוד לא נבחרה</p>
+            <p>נדב, ניר, עמית, תומר, גל, עומר וגבי · בריכה פרטית · עוד לא נבחרה</p>
             <p>מועמדות: Rawai SeaView · Rosemary Villa (Bang Tao)</p>
           </div>
           <div class="t-actions">
@@ -659,7 +629,7 @@
       <div class="rem">
         <div class="rem-ico">🛂</div>
         <div>
-          <div>ניר, עמית ותומר צריכים למלא TDAC לפני הנחיתה</div>
+          <div>ניר, עמית, תומר, גל, עומר וגבי צריכים למלא TDAC לפני הנחיתה</div>
           <div class="rem-meta">חובה לכל נוסע שאינו תאילנדי</div>
         </div>
       </div>
@@ -703,7 +673,7 @@
     </a>
   </div>
 
-  <p class="footer">מעודכן לפי עמוד הטיול · כל השעות לפי שעון תאילנד (Asia/Bangkok)<br/>תאילנד 2026 · נדב · ניר · עמית · תומר 🌴</p>
+  <p class="footer">מעודכן לפי עמוד הטיול · כל השעות לפי שעון תאילנד (Asia/Bangkok)<br/>תאילנד 2026 · נדב · ניר · עמית · תומר · גל · עומר · גבי 🌴</p>
 </div>
 
 <script>
@@ -786,12 +756,12 @@
   }
 
 
-  // Hero slideshow — 5s crossfade, preloaded
+  // Hero slideshow — 4s crossfade, preloaded
   (function heroRotate() {
     const slides = Array.from(document.querySelectorAll("#hero-slides .hero-slide"));
     if (slides.length < 2) return;
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const INTERVAL = 5000;
+    const INTERVAL = 4000;
     // Preload
     slides.forEach((el) => {
       const m = (el.style.backgroundImage || "").match(/url\(['"]?([^'")]+)['"]?\)/);
