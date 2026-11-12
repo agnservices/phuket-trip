@@ -60,14 +60,21 @@
   /* HERO */
   .hero {
     position: relative;
-    min-height: 92vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 24px 16px 40px;
+    justify-content: flex-start;
+    padding: 0 0 28px;
     margin: 0 -16px 28px;
     border-radius: 0 0 28px 28px;
     overflow: hidden;
+    background: #061525;
+  }
+  /* Reserves the 16:9 scene box at the top so landscape frames are not cover-cropped */
+  .hero-frame {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    flex: 0 0 auto;
+    pointer-events: none;
   }
   .hero-slides {
     position: absolute;
@@ -78,23 +85,59 @@
   .hero-slide {
     position: absolute;
     inset: 0;
-    background-position: center 20%;
-    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0 0; /* image is painted by ::before / ::after */
     opacity: 0;
     transition: opacity 1s ease-in-out;
     will-change: opacity;
   }
   .hero-slide.is-active { opacity: 1; }
+  /* Blurred fill behind the text block and letterboxing */
+  .hero-slide::before {
+    content: "";
+    position: absolute;
+    inset: -24px;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(28px) saturate(1.15);
+    transform: scale(1.08);
+    z-index: 0;
+  }
+  /* Sharp full 16:9 scene at the top — contain, never cropped */
+  .hero-slide::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    aspect-ratio: 16 / 9;
+    background-image: inherit;
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+  /* Hairline fade at the very bottom of the 16:9 scene; text sits fully below it */
   .hero::before {
     content: "";
     position: absolute;
-    inset: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    aspect-ratio: 16 / 9;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(180deg, rgba(6,21,37,0.15) 0%, rgba(6,21,37,0.35) 35%, rgba(6,21,37,0.92) 78%, #061525 100%);
+    background: linear-gradient(180deg, transparent 0%, transparent 90%, rgba(6,21,37,0.35) 100%);
   }
-  .hero-inner { position: relative; z-index: 2; }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
+    padding: 16px 16px 0;
+  }
   .pill {
     display: inline-flex;
     align-items: center;
@@ -396,7 +439,8 @@
   @media (min-width: 640px) {
     .crew { grid-template-columns: repeat(4, 1fr); }
     .crew-card:last-child { grid-column: auto; width: auto; justify-self: stretch; }
-    .hero { min-height: 78vh; margin: 0 -16px 36px; border-radius: 0 0 36px 36px; }
+    .hero { margin: 0 -16px 36px; border-radius: 0 0 36px 36px; }
+    .hero-inner { margin-top: 0; padding-top: 20px; }
   }
 
 
@@ -412,14 +456,15 @@
 <div class="wrap">
 
   <header class="hero">
+    <div class="hero-frame" aria-hidden="true"></div>
     <div class="hero-slides" id="hero-slides" aria-hidden="true">
-      <div class="hero-slide is-active" style="background-image:url('assets/hero.jpg?v=20261111d')" data-label="עמית לשם"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-nadav-boss.jpg?v=20261111d')" data-label="נדב אשל"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-nir-chill.jpg?v=20261111d')" data-label="ניר זוהר"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-tomer-gym.jpg?v=20261111d')" data-label="תומר פרזן"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-gal-casanova.jpg?v=20261111d')" data-label="גל ארז"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-omer-pilot.jpg?v=20261111d')" data-label="עומר קנת"></div>
-      <div class="hero-slide" style="background-image:url('assets/hero-gabi-poker.jpg?v=20261111d')" data-label="גבי ארז"></div>
+      <div class="hero-slide is-active" style="background-image:url('assets/hero.jpg?v=20261112a')" data-label="עמית לשם"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-nadav-boss.jpg?v=20261112a')" data-label="נדב אשל"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-nir-chill.jpg?v=20261112a')" data-label="ניר זוהר"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-tomer-gym.jpg?v=20261112a')" data-label="תומר פרזן"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-gal-casanova.jpg?v=20261112a')" data-label="גל ארז"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-omer-pilot.jpg?v=20261112a')" data-label="עומר קנת"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-gabi-poker.jpg?v=20261112a')" data-label="גבי ארז"></div>
     </div>
     <div class="hero-inner">
       <div class="pill">🏝️ טיול החבר׳ה · 17–24.11.2026</div>
@@ -446,37 +491,37 @@
     <h2 class="sec-title"><span class="emoji">👥</span> מי בטיול</h2>
     <div class="crew">
       <div class="crew-card">
-        <img class="avatar photo" src="assets/nadav-cartoon-avatar.jpg?v=20261111d" alt="נדב אשל" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/nadav-cartoon-avatar.jpg?v=20261112a" alt="נדב אשל" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">נדב אשל</div>
         <div class="crew-tag">פוקט · 17–24.11</div>
       </div>
       <div class="crew-card">
-        <img class="avatar photo" src="assets/nir-cartoon-avatar.jpg?v=20261111d" alt="ניר זהר" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/nir-cartoon-avatar.jpg?v=20261112a" alt="ניר זהר" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">ניר זהר</div>
         <div class="crew-tag">מצטרף 17.11</div>
       </div>
       <div class="crew-card">
-        <img class="avatar photo" src="assets/amit-cartoon-avatar.jpg?v=20261111d" alt="עמית לשם" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/amit-cartoon-avatar.jpg?v=20261112a" alt="עמית לשם" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">עמית לשם</div>
         <div class="crew-tag">מצטרף 17.11</div>
       </div>
       <div class="crew-card">
-        <img class="avatar photo" src="assets/tomer-cartoon-avatar.jpg?v=20261111d" alt="תומר פרזן" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/tomer-cartoon-avatar.jpg?v=20261112a" alt="תומר פרזן" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">תומר פרזן</div>
         <div class="crew-tag">מצטרף 17.11</div>
       </div>
       <div class="crew-card">
-        <img class="avatar photo" src="assets/gal-cartoon-avatar.jpg?v=20261111d" alt="גל ארז" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/gal-cartoon-avatar.jpg?v=20261112a" alt="גל ארז" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">גל ארז</div>
         <div class="crew-tag">מצטרף 17.11</div>
       </div>
       <div class="crew-card">
-        <img class="avatar photo" src="assets/omer-cartoon-avatar.jpg?v=20261111d" alt="עומר קנת" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/omer-cartoon-avatar.jpg?v=20261112a" alt="עומר קנת" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">עומר קנת</div>
         <div class="crew-tag">מצטרף 17.11</div>
       </div>
       <div class="crew-card">
-        <img class="avatar photo" src="assets/gabi-cartoon-avatar.jpg?v=20261111d" alt="גבי ארז" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <img class="avatar photo" src="assets/gabi-cartoon-avatar.jpg?v=20261112a" alt="גבי ארז" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">גבי ארז</div>
         <div class="crew-tag">מצטרף 17.11</div>
       </div>
