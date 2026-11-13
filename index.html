@@ -249,11 +249,10 @@
   .crew-name { font-weight: 700; font-size: 0.95rem; }
   .crew-tag { font-size: 11px; color: var(--muted); margin-top: 3px; }
 
-  .crew-card:last-child {
-    grid-column: 1 / -1;
-    justify-self: center;
-    width: calc((100% - 10px) / 2);
-  }
+  .crew-card:nth-child(5) .avatar { background: linear-gradient(135deg, #34d399, #2dd4bf); }
+  .crew-card:nth-child(6) .avatar { background: linear-gradient(135deg, #f472b6, #fb7185); }
+  .crew-card:nth-child(7) .avatar { background: linear-gradient(135deg, #a78bfa, #818cf8); }
+  .crew-card:nth-child(8) .avatar { background: linear-gradient(135deg, #fbbf24, #f97316); }
 
 
   /* Timeline */
@@ -438,7 +437,6 @@
 
   @media (min-width: 640px) {
     .crew { grid-template-columns: repeat(4, 1fr); }
-    .crew-card:last-child { grid-column: auto; width: auto; justify-self: stretch; }
     .hero { margin: 0 -16px 36px; border-radius: 0 0 36px 36px; }
     .hero-inner { margin-top: 0; padding-top: 20px; }
   }
@@ -469,7 +467,7 @@
     <div class="hero-inner">
       <div class="pill">🏝️ טיול החבר׳ה · 17–24.11.2026</div>
       <h1>תאילנד 2026 🌴<br/>החבר׳ה בפוקט</h1>
-      <p class="sub">פוקט · 17–24.11 · בריכות, בשר וים. כל מה שסגור, ומה שעוד פתוח.</p>
+      <p class="sub">פוקט · קייפ יאמו · 17–24.11 · בריכות, בשר וים. כל מה שסגור, ומה שעוד פתוח.</p>
       <div class="countdown" id="countdown" aria-live="polite">
         <div class="cd-item"><span class="cd-num" id="cd-d">--</span><div class="cd-label">ימים</div></div>
         <div class="cd-item"><span class="cd-num" id="cd-h">--</span><div class="cd-label">שעות</div></div>
@@ -493,37 +491,42 @@
       <div class="crew-card">
         <img class="avatar photo" src="assets/nadav-cartoon-avatar.jpg?v=20261112a" alt="נדב אשל" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">נדב אשל</div>
-        <div class="crew-tag">פוקט · 17–24.11</div>
-      </div>
-      <div class="crew-card">
-        <img class="avatar photo" src="assets/nir-cartoon-avatar.jpg?v=20261112a" alt="ניר זהר" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
-        <div class="crew-name">ניר זהר</div>
-        <div class="crew-tag">מצטרף 17.11</div>
-      </div>
-      <div class="crew-card">
-        <img class="avatar photo" src="assets/amit-cartoon-avatar.jpg?v=20261112a" alt="עמית לשם" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
-        <div class="crew-name">עמית לשם</div>
-        <div class="crew-tag">מצטרף 17.11</div>
+        <div class="crew-tag">17–24.11</div>
       </div>
       <div class="crew-card">
         <img class="avatar photo" src="assets/tomer-cartoon-avatar.jpg?v=20261112a" alt="תומר פרזן" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">תומר פרזן</div>
-        <div class="crew-tag">מצטרף 17.11</div>
+        <div class="crew-tag">17–24.11</div>
+      </div>
+      <div class="crew-card">
+        <div class="avatar" aria-hidden="true">ל</div>
+        <div class="crew-name">ליאם</div>
+        <div class="crew-tag">17–24.11</div>
+      </div>
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/amit-cartoon-avatar.jpg?v=20261112a" alt="עמית לשם" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">עמית לשם</div>
+        <div class="crew-tag">17–24.11</div>
+      </div>
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/nir-cartoon-avatar.jpg?v=20261112a" alt="ניר זוהר" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">ניר זוהר</div>
+        <div class="crew-tag">17–24.11</div>
       </div>
       <div class="crew-card">
         <img class="avatar photo" src="assets/gal-cartoon-avatar.jpg?v=20261112a" alt="גל ארז" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">גל ארז</div>
-        <div class="crew-tag">מצטרף 17.11</div>
-      </div>
-      <div class="crew-card">
-        <img class="avatar photo" src="assets/omer-cartoon-avatar.jpg?v=20261112a" alt="עומר קנת" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
-        <div class="crew-name">עומר קנת</div>
-        <div class="crew-tag">מצטרף 17.11</div>
+        <div class="crew-tag">18–24.11</div>
       </div>
       <div class="crew-card">
         <img class="avatar photo" src="assets/gabi-cartoon-avatar.jpg?v=20261112a" alt="גבי ארז" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
         <div class="crew-name">גבי ארז</div>
-        <div class="crew-tag">מצטרף 17.11</div>
+        <div class="crew-tag">18–24.11</div>
+      </div>
+      <div class="crew-card">
+        <img class="avatar photo" src="assets/omer-cartoon-avatar.jpg?v=20261112a" alt="עומר קנת" width="52" height="52" style="object-fit:cover;object-position:center;display:block;background:none;" />
+        <div class="crew-name">עומר קנת</div>
+        <div class="crew-tag">18–20.11 · יוצא ב־20</div>
       </div>
     </div>
   </section>
@@ -535,21 +538,27 @@
     <div class="timeline" id="timeline-list">
 
       <!-- 17-24 villa -->
-      <article class="t-item open" data-start="2026-11-17" data-end="2026-11-24">
+      <article class="t-item" data-start="2026-11-17" data-end="2026-11-24">
         <div class="t-dot"></div>
         <div class="t-card">
           <div class="t-top">
-            <span class="t-date">17–24.11</span>
-            <span class="badge warn">פתוח</span>
+            <span class="t-date">שלישי 17.11 – שלישי 24.11 · 7 לילות</span>
+            <span class="badge ok">נבחרה</span>
           </div>
-          <h3 class="t-title">🏡 וילה 4 חדרי שינה · כולם ביחד</h3>
+          <h3 class="t-title">🏡 Villa Sawarin · קייפ יאמו</h3>
           <div class="t-meta">
-            <p>נדב, ניר, עמית, תומר, גל, עומר וגבי · בריכה פרטית · עוד לא נבחרה</p>
-            <p>מועמדות: Rawai SeaView · Rosemary Villa (Bang Tao)</p>
+            <p>צ׳ק־אין שלישי 17.11 · צ׳ק־אאוט שלישי 24.11 · 8 אנשים</p>
+            <p><strong>מגיעים ב־17:</strong> נדב, תומר פרזן, ליאם, עמית לשם, ניר זוהר</p>
+            <p><strong>מגיעים ב־18:</strong> גל ארז, גבי ארז, עומר קנת · עומר נשאר לילות 18–19 ויוצא ב־20.11</p>
+            <p><strong>סה״כ $25,200</strong> · $3,600 ללילה · כל לילה מתחלק בין מי שישן באותו לילה</p>
+            <p>מי שמגיע ב־17: <strong>$3,677</strong> לאדם · גל וגבי: <strong>$2,957</strong> כל אחד · עומר: <strong>$900</strong></p>
+            <p>10 חדרי שינה עם מקלחת צמודה · בריכה 23×8 מ׳ עם נוף לים · חדר ספא עם 2 מיטות עיסוי · חדר כושר · חדר משחקים (ביליארד וקריוקי) · בית חוף עם מדורת אש · קיאקים ו־SUP</p>
+            <p>6 אנשי צוות כולל שף ובאטלר · העברה משדה התעופה כלולה</p>
+            <p>שעות שקט 23:00–08:00 · אסור אירועים עם אורחים שלא רשומים בהזמנה</p>
           </div>
           <div class="t-actions">
-            <a class="btn" target="_blank" rel="noopener" href="https://www.airbnb.com/rooms/930761022304341654">Rawai SeaView</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.airbnb.com/rooms/1019957473103537820">Rosemary Villa</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.villasawarin.com">🌐 האתר</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Villa%20Sawarin%20Cape%20Yamu%20Phuket">📍 מפה</a>
           </div>
         </div>
       </article>
@@ -674,7 +683,7 @@
       <div class="rem">
         <div class="rem-ico">🛂</div>
         <div>
-          <div>ניר, עמית, תומר, גל, עומר וגבי צריכים למלא TDAC לפני הנחיתה</div>
+          <div>ניר, עמית, תומר, ליאם, גל, עומר וגבי צריכים למלא TDAC לפני הנחיתה</div>
           <div class="rem-meta">חובה לכל נוסע שאינו תאילנדי</div>
         </div>
       </div>
@@ -700,6 +709,13 @@
         </div>
       </div>
       <div class="rem">
+        <div class="rem-ico">🏡</div>
+        <div>
+          <div>Sawarin: שעות שקט 23:00–08:00 · אסור להכניס אורחים שלא רשומים בהזמנה</div>
+          <div class="rem-meta">קייפ יאמו · 17–24.11</div>
+        </div>
+      </div>
+      <div class="rem">
         <div class="rem-ico">🛥️</div>
         <div>
           <div>להגיע למשרד YONA ב־Royal Phuket Marina</div>
@@ -718,7 +734,7 @@
     </a>
   </div>
 
-  <p class="footer">מעודכן לפי עמוד הטיול · כל השעות לפי שעון תאילנד (Asia/Bangkok)<br/>תאילנד 2026 · נדב · ניר · עמית · תומר · גל · עומר · גבי 🌴</p>
+  <p class="footer">מעודכן לפי עמוד הטיול · כל השעות לפי שעון תאילנד (Asia/Bangkok)<br/>תאילנד 2026 · נדב · תומר · ליאם · עמית · ניר · גל · גבי · עומר 🌴</p>
 </div>
 
 <script>
